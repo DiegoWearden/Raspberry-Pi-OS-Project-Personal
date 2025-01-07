@@ -1,7 +1,8 @@
 # Cross compiler and tools
-CROSS_COMPILE = aarch64-linux-gnu-
+CROSS_COMPILE = aarch64-none-elf-
 AS = $(CROSS_COMPILE)as
-CC = $(CROSS_COMPILE)g++
+CC = $(CROSS_COMPILE)gcc
+CXX = $(CROSS_COMPILE)g++
 LD = $(CROSS_COMPILE)ld
 OBJCOPY = $(CROSS_COMPILE)objcopy
 
@@ -12,10 +13,12 @@ INCLUDE_DIR = include
 
 # Automatically find all source files
 ASM_SRC = $(wildcard $(SRC_DIR)/*.S)
+C_SRC = $(wildcard $(SRC_DIR)/*.c)
 CPP_SRC = $(wildcard $(SRC_DIR)/*.cpp)
 
 # Object files
 ASM_OBJ = $(ASM_SRC:$(SRC_DIR)/%.S=$(BUILD_DIR)/%.o)
+C_OBJ = $(C_SRC:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
 CPP_OBJ = $(CPP_SRC:$(SRC_DIR)/%.cpp=$(BUILD_DIR)/%.o)
 
 # Output files
@@ -38,13 +41,17 @@ $(ASM_OBJ): $(BUILD_DIR)/%.o : $(SRC_DIR)/%.S | $(BUILD_DIR)
 	$(AS) $(BUILD_DIR)/$(<F).i -o $@
 	rm $(BUILD_DIR)/$(<F).i
 
-# Compile the C++ source files
-$(CPP_OBJ): $(BUILD_DIR)/%.o : $(SRC_DIR)/%.cpp | $(BUILD_DIR)
+# Compile the C source files
+$(C_OBJ): $(BUILD_DIR)/%.o : $(SRC_DIR)/%.c | $(BUILD_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
+# Compile the C++ source files
+$(CPP_OBJ): $(BUILD_DIR)/%.o : $(SRC_DIR)/%.cpp | $(BUILD_DIR)
+	$(CXX) $(CFLAGS) -c $< -o $@
+
 # Link the object files into the kernel ELF
-$(KERNEL_ELF): $(ASM_OBJ) $(CPP_OBJ)
-	$(LD) $(LDFLAGS) -o $(KERNEL_ELF) $(ASM_OBJ) $(CPP_OBJ)
+$(KERNEL_ELF): $(ASM_OBJ) $(C_OBJ) $(CPP_OBJ)
+	$(LD) $(LDFLAGS) -o $(KERNEL_ELF) $(ASM_OBJ) $(C_OBJ) $(CPP_OBJ)
 
 # Convert the ELF to a binary image
 $(KERNEL_IMG): $(KERNEL_ELF)
@@ -53,10 +60,10 @@ $(KERNEL_IMG): $(KERNEL_ELF)
 clean:
 	rm -rf $(BUILD_DIR)
 
-run: all
+run:
 	qemu-system-aarch64 -M raspi3b -kernel $(KERNEL_IMG) -smp 4 -serial stdio 
 
-debug: all
+debug:
 	qemu-system-aarch64 -M raspi3b -kernel $(KERNEL_IMG) -smp 4 -serial stdio -S -gdb tcp::1234
 
 .PHONY: all clean run debug

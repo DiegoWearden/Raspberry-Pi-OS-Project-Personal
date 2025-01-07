@@ -3,6 +3,7 @@
         "memory": "cpp",
         "compare": "cpp",
         "cstdint": "cpp",
-        "format": "cpp"
+        "format": "cpp",
+        "rpi-smartstart.h": "c"
     }
 }

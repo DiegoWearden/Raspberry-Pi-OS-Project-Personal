@@ -6,6 +6,7 @@
 #include "percpu.h"
 #include "spinlock.h"
 #include "entry.h"
+#include "mmu.h"
 
 Spinlock lock;
 
@@ -103,50 +104,50 @@ void clear_caches() {
 }
 
 
-void mmu_init() {
-    uint64_t i, r;
+// void mmu_init() {
+//     uint64_t i, r;
 
-    // Clear the translation table
-    for (i = 0; i < 512; i++) {
-        ttlb_lvl1[i] = 0;
-    }
+//     // Clear the translation table
+//     for (i = 0; i < 512; i++) {
+//         ttlb_lvl1[i] = 0;
+//     }
 
-    // Map normal memory regions
-    for (i = 0x0; i < 0x3FFFFFFF- PAGE_SIZE; i += PAGE_SIZE) {
-        map_page(ttlb_lvl1, i, i, NORMAL_FLAGS); // Normal memory
-    }
+//     // Map normal memory regions
+//     for (i = 0x0; i < 0x3FFFFFFF- PAGE_SIZE; i += PAGE_SIZE) {
+//         map_page(ttlb_lvl1, i, i, NORMAL_FLAGS); // Normal memory
+//     }
 
-    // Map device memory regions
-    for (i = 0x3F000000; i < 0x40000000; i += PAGE_SIZE) {
-        map_page(ttlb_lvl1, i, i, DEVICE_FLAGS); // Device memory
-    }
+//     // Map device memory regions
+//     for (i = 0x3F000000; i < 0x40000000; i += PAGE_SIZE) {
+//         map_page(ttlb_lvl1, i, i, DEVICE_FLAGS); // Device memory
+//     }
 
-    // Set Memory Attribute Indirection Register (MAIR_EL1)
-    uint64_t mair = (0xFF << 0) | (0x04 << 8);
-    asm volatile("msr mair_el1, %0" : : "r" (mair));
+//     // Set Memory Attribute Indirection Register (MAIR_EL1)
+//     uint64_t mair = (0xFF << 0) | (0x04 << 8);
+//     asm volatile("msr mair_el1, %0" : : "r" (mair));
+//     asm volatile("isb");
 
-    // Set Translation Control Register (TCR_EL1)
-    uint64_t tcr = (32ULL << 0)  | // T0SZ = 25 (32-bit address space)
-                   (1ULL << 10)  | // ORGN0 = Normal, WB, RA, WA
-                   (1ULL << 8)   | // IRGN0 = Normal, WB, RA, WA
-                   (3ULL << 12)  | // Inner Shareable
-                   (1ULL << 30);   // TG0 = 4KB (page granule)
-    asm volatile("msr tcr_el1, %0" : : "r" (tcr));
+//     // Set Translation Control Register (TCR_EL1)
+//     uint64_t tcr = (32ULL << 0)  | // T0SZ = 25 (32-bit address space)
+//                    (1ULL << 10)  | // ORGN0 = Normal, WB, RA, WA
+//                    (1ULL << 8)   | // IRGN0 = Normal, WB, RA, WA
+//                    (3ULL << 12)  | // Inner Shareable
+//                    (1ULL << 30);   // TG0 = 4KB (page granule)
+//     asm volatile("msr tcr_el1, %0" : : "r" (tcr));
 
-    // Set Translation Table Base Register 0 (TTBR0_EL1)
-    asm volatile("msr ttbr0_el1, %0" : : "r" (ttlb_lvl1));
+//     // Set Translation Table Base Register 0 (TTBR0_EL1)
+//     asm volatile("msr ttbr0_el1, %0" : : "r" (ttlb_lvl1));
 
-    // Enable the MMU and caches in System Control Register (SCTLR_EL1)
+//     // Enable the MMU and caches in System Control Register (SCTLR_EL1)
+//     asm volatile("mrs %0, sctlr_el1" : "=r" (r));
+//     r |= 1;         // Enable MMU
+//     r |= (1 << 2);  // Enable data cache
+//     r |= (1 << 12); // Enable instruction cache
+//     asm volatile("msr sctlr_el1, %0; isb" : : "r"(r));
 
-    asm volatile("mrs %0, sctlr_el1" : "=r" (r));
-    r |= 1;         // Enable MMU
-    r |= (1 << 2);  // Enable data cache
-    r |= (1 << 12); // Enable instruction cache
-    asm volatile("msr sctlr_el1, %0; isb" : : "r"(r));
-
-    // Print the translation table for debugging
-    print_translation_table(ttlb_lvl1);
-}
+//     // Print the translation table for debugging
+//     print_translation_table(ttlb_lvl1);
+// }
 
 void print_binary(uint64_t value) {
     for (int i = 63; i >= 0; i--) {
@@ -207,6 +208,22 @@ void test_null_mapping() {
     }
 }
 
+void test_atomic_operations_iso() {
+    uint32_t *addr = (uint32_t *)0x8AF84;
+    uint32_t result;
+
+    // Load exclusive
+    asm volatile("ldaxr %w0, [%1]" : "=&r"(result) : "r"(addr));
+
+    // Store exclusive
+    uint32_t new_val = 0xA;
+    uint32_t success;
+    asm volatile("stlxr %w0, %w1, [%2]" : "=&r"(success) : "r"(new_val), "r"(addr));
+
+    printf("Value at 0x8AF84: 0x%X, stlxr result: %d\n", result, success);
+}
+
+
 void test_atomic_operations(void) {
     // Define variables
     int val = 0;
@@ -230,6 +247,63 @@ void test_atomic_operations(void) {
     printf("Final value of val: %d\n", val);
 }
 
+void write_nops(uint64_t target_address, int count) {
+    if (target_address % 4 != 0) {
+        printf("Error: target_address (0x%X) is not aligned to 4 bytes.\n", target_address);
+        return;
+    }
+
+    if (count <= 0) {
+        printf("Error: Invalid count value (%d).\n", count);
+        return;
+    }
+
+    asm volatile(
+        // Initialize loop counter and base address
+        "mov x0, %[address]        \n" // x0 = target_address (64-bit register)
+        "mov x1, %[count]          \n" // x1 = count (loop counter, 64-bit register)
+
+        // Load NOP instruction into w2 (32-bit)
+        "movz w2, #0x201F          \n" // Load high 16 bits (0xD503)
+        "movk w2, #0xD503, lsl #16 \n" // Load low 16 bits (0x201F) into w2
+
+        // Loop start
+        "1:                        \n"
+        "ldxr w2, [x0]          \n" // Store NOP and increment address (x0 += 4)
+        "subs x1, x1, #1           \n" // Decrement loop counter (x1 -= 1)
+        "bne 1b                    \n" // Branch to loop start if x1 != 0
+
+        // Memory barrier to ensure writes are visible
+        "dsb ish                   \n"
+        "isb                       \n"
+
+        :                          // No output operands
+        : [address] "r"(target_address), [count] "r"(count) // Input operands
+        : "x0", "x1", "w2", "memory" // Clobbers: registers and memory
+    );
+}
+
+
+
+
+
+
+void ensure_address_mapped(uint64_t *ttlb_lvl1, uint64_t va) {
+    uint64_t pa = va & 0xFFFFFFFFFFFFF000; // Align physical address to 4KB page
+    uint64_t flags = NORMAL_FLAGS;         // Normal memory attributes
+    map_page(ttlb_lvl1, va, pa, flags);
+
+    // Invalidate the TLB to reflect new mappings
+    asm volatile("dsb ishst; tlbi vae1is, %0; dsb ish; isb" : : "r"(va >> 12));
+}
+
+void print_memory_value(uint64_t address) {
+    uint32_t *memory_location = (uint32_t *)address; // Cast to a pointer to 32-bit data
+    printf("Value at 0x%X: 0x%X\n", address, *memory_location);
+}
+
+
+
 extern "C" void kernel_init() {
 
     uart_init();
@@ -237,9 +311,10 @@ extern "C" void kernel_init() {
     uart_puts("UART initialized!!\n\r");
     init_printf(0x0, uart_putc_wrapper);
 
-    mmu_init(); // Initialize MMU
+    // mmu_init(); // Initialize MMU
+    MMU_setup_pagetable();
+    MMU_enable();
 
-    
 
     uint64_t sctlr_el1, ttbr0_el1, ttbr1_el1, tcr_el1, mair_el1, current_el;
 
@@ -250,33 +325,29 @@ extern "C" void kernel_init() {
     asm volatile("mrs %0, MAIR_EL1" : "=r"(mair_el1));
     asm volatile("mrs %0, CurrentEL" : "=r"(current_el));
 
-    printf("SCTLR_EL1: ");
+    printf("SCTLR_EL1: 0x%X\n", sctlr_el1);
     print_binary(sctlr_el1);
-    uart_putc('\r');
+    printf("\r");
 
-    printf("TTBR0_EL1: ");
+    printf("TTBR0_EL1: 0x%X\n", ttbr0_el1);
     print_binary(ttbr0_el1);
-    uart_putc('\r');
+    printf("\r");
 
-    printf("TTBR1_EL1: ");
+    printf("TTBR1_EL1: 0x%X\n", ttbr0_el1);
     print_binary(ttbr1_el1);
-    uart_putc('\r');
+    printf("\r");
 
-    printf("TCR_EL1: ");
+    printf("TCR_EL1: 0x%X\n", tcr_el1);
     print_binary(tcr_el1);
-    uart_putc('\r');
+    printf("\r");
 
-    printf("MAIR_EL1: ");
+    printf("MAIR_EL1: 0x%X\n", mair_el1);
     print_binary(mair_el1);
-    uart_putc('\r');
+    printf("\r");
 
-    printf("CurrentEL: ");
+    printf("CurrentEL: 0x%X\n", current_el >> 2);
     print_binary(current_el);
-    uart_putc('\r');
-
-    // print_ttlb_lvl1_mappings();
-
-    test_null_mapping(); // Test for null mapping
+    printf("\r");
 
     printf("ALIGN CHECK\n");
 
@@ -291,7 +362,13 @@ extern "C" void kernel_init() {
     printf("Exception level %d\n", get_el());
     printf("Core ID: %d\n", getCoreID());
 
+    // write_nops(0x8AF84, 5);
+    // print_memory_value(0x8AF84);
+    
+
+
+    // Test atomic operations
+    // test_atomic_operations_iso();
+
     test_atomic_operations();
-    // test_stxr_ldxr_operations();
-    // lock.unlock();
 }
