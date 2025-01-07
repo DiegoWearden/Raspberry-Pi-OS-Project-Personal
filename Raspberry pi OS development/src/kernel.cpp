@@ -303,12 +303,12 @@ void print_memory_value(uint64_t address) {
 }
 
 
-
+Spinlock spin;
 extern "C" void kernel_init() {
 
     uart_init();
 
-    uart_puts("UART initialized!!\n\r");
+    // uart_puts("UART initialized!!\n\r");
     init_printf(0x0, uart_putc_wrapper);
 
     // mmu_init(); // Initialize MMU
@@ -316,51 +316,50 @@ extern "C" void kernel_init() {
     MMU_enable();
 
 
-    uint64_t sctlr_el1, ttbr0_el1, ttbr1_el1, tcr_el1, mair_el1, current_el;
+    // uint64_t sctlr_el1, ttbr0_el1, ttbr1_el1, tcr_el1, mair_el1, current_el;
 
-    asm volatile("mrs %0, SCTLR_EL1" : "=r"(sctlr_el1));
-    asm volatile("mrs %0, TTBR0_EL1" : "=r"(ttbr0_el1));
-    asm volatile("mrs %0, TTBR1_EL1" : "=r"(ttbr1_el1));
-    asm volatile("mrs %0, TCR_EL1" : "=r"(tcr_el1));
-    asm volatile("mrs %0, MAIR_EL1" : "=r"(mair_el1));
-    asm volatile("mrs %0, CurrentEL" : "=r"(current_el));
+    // asm volatile("mrs %0, SCTLR_EL1" : "=r"(sctlr_el1));
+    // asm volatile("mrs %0, TTBR0_EL1" : "=r"(ttbr0_el1));
+    // asm volatile("mrs %0, TTBR1_EL1" : "=r"(ttbr1_el1));
+    // asm volatile("mrs %0, TCR_EL1" : "=r"(tcr_el1));
+    // asm volatile("mrs %0, MAIR_EL1" : "=r"(mair_el1));
+    // asm volatile("mrs %0, CurrentEL" : "=r"(current_el));
 
-    printf("SCTLR_EL1: 0x%X\n", sctlr_el1);
-    print_binary(sctlr_el1);
-    printf("\r");
+    // printf("SCTLR_EL1: 0x%X\n", sctlr_el1);
+    // print_binary(sctlr_el1);
+    // printf("\r");
 
-    printf("TTBR0_EL1: 0x%X\n", ttbr0_el1);
-    print_binary(ttbr0_el1);
-    printf("\r");
+    // printf("TTBR0_EL1: 0x%X\n", ttbr0_el1);
+    // print_binary(ttbr0_el1);
+    // printf("\r");
 
-    printf("TTBR1_EL1: 0x%X\n", ttbr0_el1);
-    print_binary(ttbr1_el1);
-    printf("\r");
+    // printf("TTBR1_EL1: 0x%X\n", ttbr0_el1);
+    // print_binary(ttbr1_el1);
+    // printf("\r");
 
-    printf("TCR_EL1: 0x%X\n", tcr_el1);
-    print_binary(tcr_el1);
-    printf("\r");
+    // printf("TCR_EL1: 0x%X\n", tcr_el1);
+    // print_binary(tcr_el1);
+    // printf("\r");
 
-    printf("MAIR_EL1: 0x%X\n", mair_el1);
-    print_binary(mair_el1);
-    printf("\r");
+    // printf("MAIR_EL1: 0x%X\n", mair_el1);
+    // print_binary(mair_el1);
+    // printf("\r");
 
-    printf("CurrentEL: 0x%X\n", current_el >> 2);
-    print_binary(current_el);
-    printf("\r");
+    // printf("CurrentEL: 0x%X\n", current_el >> 2);
+    // print_binary(current_el);
+    // printf("\r");
 
-    printf("ALIGN CHECK\n");
+    // printf("ALIGN CHECK\n");
 
-    struct align_check1 ac1;
-    memcpy(&ac1, buffer, 7);
-    printf("UNPACKED: A: %X, B: %X, C: %X, D: %X\n", ac1.a, ac1.b, ac1.c, ac1.d);
+    // struct align_check1 ac1;
+    // memcpy(&ac1, buffer, 7);
+    // printf("UNPACKED: A: %X, B: %X, C: %X, D: %X\n", ac1.a, ac1.b, ac1.c, ac1.d);
 
-    struct align_check2 ac2;
-    memcpy(&ac2, buffer, 7);
-    printf("PACKED: A: %X, B: %X, C: %X, D: %X\n", ac2.a, ac2.b, ac2.c, ac2.d);
+    // struct align_check2 ac2;
+    // memcpy(&ac2, buffer, 7);
+    // printf("PACKED: A: %X, B: %X, C: %X, D: %X\n", ac2.a, ac2.b, ac2.c, ac2.d);
 
-    printf("Exception level %d\n", get_el());
-    printf("Core ID: %d\n", getCoreID());
+    // printf("Exception level %d\n", get_el());
 
     // write_nops(0x8AF84, 5);
     // print_memory_value(0x8AF84);
@@ -369,6 +368,8 @@ extern "C" void kernel_init() {
 
     // Test atomic operations
     // test_atomic_operations_iso();
-
-    test_atomic_operations();
+    spin.lock();
+    printf("Core ID: %d\n", getCoreID());
+    // test_atomic_operations();
+    spin.unlock();
 }

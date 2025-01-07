@@ -62,7 +62,7 @@ el1_entry:
     bl pickKernelStack
     mov    sp, x0
 
-    //bl    wake_up_cores
+    bl    wake_up_cores
 
     bl    kernel_init
     b     proc_hang        // should never come here

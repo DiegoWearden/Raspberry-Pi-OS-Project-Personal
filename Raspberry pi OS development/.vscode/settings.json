@@ -4,6 +4,8 @@
         "compare": "cpp",
         "cstdint": "cpp",
         "format": "cpp",
-        "rpi-smartstart.h": "c"
+        "rpi-smartstart.h": "c",
+        "cstdarg": "cpp",
+        "cstdbool": "cpp"
     }
 }

@@ -1,5 +1,5 @@
 # Cross compiler and tools
-CROSS_COMPILE = aarch64-none-elf-
+CROSS_COMPILE = aarch64-linux-gnu-
 AS = $(CROSS_COMPILE)as
 CC = $(CROSS_COMPILE)gcc
 CXX = $(CROSS_COMPILE)g++
@@ -26,7 +26,7 @@ KERNEL_ELF = $(BUILD_DIR)/kernel.elf
 KERNEL_IMG = $(BUILD_DIR)/kernel8.img
 
 # Compiler and linker flags
-CFLAGS = -Wall -Wextra -nostdlib -ffreestanding -I$(INCLUDE_DIR) -g -mcpu=cortex-a53 -march=armv8-a+crc -latomic -mstrict-align -mno-outline-atomics
+CFLAGS = -Wall -Wextra -nostdlib -ffreestanding -I$(INCLUDE_DIR) -g -mcpu=cortex-a53 -march=armv8-a+crc -latomic -mstrict-align -mno-outline-atomics -fpermissive
 LDFLAGS = -T linker.ld  # Use the custom linker script
 
 # Build rules
