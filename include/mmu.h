@@ -4,7 +4,7 @@
 #ifdef __cplusplus								// If we are including to a C++
 extern "C" {									// Put extern C directive wrapper around
 #endif
-#include <stdint.h>								// Needed for uint8_t, uint32_t, etc
+#include "stdint.h"								// Needed for uint8_t, uint32_t, etc
 #include "rpi-SmartStart.h"						// Needed for RegType_t
 
 #define MT_DEVICE_NGNRNE	0

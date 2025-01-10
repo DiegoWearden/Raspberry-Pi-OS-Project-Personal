@@ -1,69 +1,63 @@
-# Cross compiler and tools
-CROSS_COMPILE = aarch64-linux-gnu-
-AS = $(CROSS_COMPILE)as
-CC = $(CROSS_COMPILE)gcc
-CXX = $(CROSS_COMPILE)g++
-LD = $(CROSS_COMPILE)ld
-OBJCOPY = $(CROSS_COMPILE)objcopy
+SHELL := /bin/bash
 
-# Directories
-BUILD_DIR = build
-SRC_DIR = src
-INCLUDE_DIR = include
+# 1) "all": build the kernel in src/ and all test images
+all: build-tests
 
-# Automatically find all source files
-ASM_SRC = $(wildcard $(SRC_DIR)/*.S)
-C_SRC = $(wildcard $(SRC_DIR)/*.c)
-CPP_SRC = $(wildcard $(SRC_DIR)/*.cpp)
+# 2) Identify tests by scanning tests/*.cpp
+TESTS_DIR  ?= tests
+TESTS_CPP  := $(wildcard $(TESTS_DIR)/*.cpp)
+TEST_NAMES := $(notdir $(basename $(TESTS_CPP)))
 
-# Object files
-ASM_OBJ = $(ASM_SRC:$(SRC_DIR)/%.S=$(BUILD_DIR)/%.o)
-C_OBJ = $(C_SRC:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
-CPP_OBJ = $(CPP_SRC:$(SRC_DIR)/%.cpp=$(BUILD_DIR)/%.o)
+# 3) "build-tests": Build all test images before running tests
+build-tests:
+	@for t in $(TEST_NAMES); do \
+		echo "=========================================================="; \
+		echo "Building test: $$t"; \
+		$(MAKE) -C src ../build/$$t.img; \
+	done
 
-# Output files
-KERNEL_ELF = $(BUILD_DIR)/kernel.elf
-KERNEL_IMG = $(BUILD_DIR)/kernel8.img
+# 4) "test": Run QEMU for each test image, capturing output and comparing results
+test: all
+	@for t in $(TEST_NAMES); do \
+		echo "=========================================================="; \
+		echo "Running test: $$t"; \
+		echo "Running QEMU, capturing output to '$(TESTS_DIR)/$$t.out'..."; \
+		rm -f $(TESTS_DIR)/$$t.out; \
+		qemu-system-aarch64 \
+		    -M raspi3b \
+		    -kernel build/$$t.img \
+		    -smp 4 \
+		    -serial file:$(TESTS_DIR)/$$t.out \
+		    -nographic \
+		    -no-reboot \
+		    -no-shutdown || true; \
+		\
+		if [ -f "$(TESTS_DIR)/$$t.ok" ]; then \
+			echo "Comparing output..."; \
+			if diff -q $(TESTS_DIR)/$$t.out $(TESTS_DIR)/$$t.ok >/dev/null 2>&1; then \
+				echo "$$t: pass"; \
+			else \
+				echo "$$t: fail"; \
+				echo "Differences found, saving to $(TESTS_DIR)/$$t.diff"; \
+				diff $(TESTS_DIR)/$$t.ok $(TESTS_DIR)/$$t.out > $(TESTS_DIR)/$$t.diff; \
+			fi; \
+		else \
+			echo "Warning: No $(TESTS_DIR)/$$t.ok file found."; \
+		fi; \
+	done
 
-# Compiler and linker flags
-CFLAGS = -Wall -Wextra -nostdlib -ffreestanding -I$(INCLUDE_DIR) -g -mcpu=cortex-a53 -march=armv8-a+crc -latomic -mstrict-align -mno-outline-atomics -fpermissive
-LDFLAGS = -T linker.ld  # Use the custom linker script
 
-# Build rules
-all: $(KERNEL_IMG)
+# 5) "run": Run the normal kernel (already built by "all") in QEMU
+run: all
+	qemu-system-aarch64 \
+	    -M raspi3b \
+	    -kernel build/kernel8.img \
+	    -smp 4 \
+	    -serial stdio \
+	    -nographic
 
-$(BUILD_DIR):
-	mkdir -p $(BUILD_DIR)
-
-# Preprocess and assemble the assembly files
-$(ASM_OBJ): $(BUILD_DIR)/%.o : $(SRC_DIR)/%.S | $(BUILD_DIR)
-	$(CC) -E -x assembler-with-cpp -I$(INCLUDE_DIR) $< -o $(BUILD_DIR)/$(<F).i
-	$(AS) $(BUILD_DIR)/$(<F).i -o $@
-	rm $(BUILD_DIR)/$(<F).i
-
-# Compile the C source files
-$(C_OBJ): $(BUILD_DIR)/%.o : $(SRC_DIR)/%.c | $(BUILD_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
-
-# Compile the C++ source files
-$(CPP_OBJ): $(BUILD_DIR)/%.o : $(SRC_DIR)/%.cpp | $(BUILD_DIR)
-	$(CXX) $(CFLAGS) -c $< -o $@
-
-# Link the object files into the kernel ELF
-$(KERNEL_ELF): $(ASM_OBJ) $(C_OBJ) $(CPP_OBJ)
-	$(LD) $(LDFLAGS) -o $(KERNEL_ELF) $(ASM_OBJ) $(C_OBJ) $(CPP_OBJ)
-
-# Convert the ELF to a binary image
-$(KERNEL_IMG): $(KERNEL_ELF)
-	$(OBJCOPY) -O binary $(KERNEL_ELF) $(KERNEL_IMG)
-
+# 6) Clean: Remove all build files and test outputs except source files
 clean:
-	rm -rf $(BUILD_DIR)
+	@$(MAKE) -C src clean
 
-run:
-	qemu-system-aarch64 -M raspi3b -kernel $(KERNEL_IMG) -smp 4 -serial stdio 
-
-debug:
-	qemu-system-aarch64 -M raspi3b -kernel $(KERNEL_IMG) -smp 4 -serial stdio -S -gdb tcp::1234
-
-.PHONY: all clean run debug
+.PHONY: all test clean run build-tests

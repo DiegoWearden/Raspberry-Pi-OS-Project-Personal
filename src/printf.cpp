@@ -21,7 +21,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 #include "printf.h"
 #include "uart.h"
+#include "atomic.h"
 
+SpinLock lock;
 typedef void (*putcf) (void*,char);
 static putcf stdout_putf;
 static void* stdout_putp;
@@ -213,7 +215,9 @@ void tfp_printf(char *fmt, ...)
     {
     va_list va;
     va_start(va,fmt);
+    lock.lock();
     tfp_format(stdout_putp,stdout_putf,fmt,va);
+    lock.unlock();
     va_end(va);
     }
 

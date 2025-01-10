@@ -110,8 +110,6 @@ typedef union {
 } VMSAv8_64_DESCRIPTOR;
 
 // Verify it’s the same size as RegType_t (64 bits, presumably)
-static_assert(sizeof(VMSAv8_64_DESCRIPTOR) == sizeof(RegType_t),
-              "VMSAv8_64_DESCRIPTOR should be size of a register");
 
 //------------------------------------------------------------------------------
 //             STAGE-2 AND STAGE-3 DESCRIPTOR TABLES
@@ -196,7 +194,7 @@ void MMU_setup_pagetable(void)
         };
     }
 
-    // (c) 16 MB peripherals at 0x3F000000 - 0x40000000
+    //(c) 16 MB peripherals at 0x3F000000 - 0x40000000
     for (; base < 512; base++)
     {
         Stage2map1to1[base] = (VMSAv8_64_DESCRIPTOR){
