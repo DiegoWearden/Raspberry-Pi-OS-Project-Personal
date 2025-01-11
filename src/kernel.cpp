@@ -283,7 +283,6 @@ uint64_t __heap_size = ((uint64_t)__heap_end - (uint64_t)__heap_start);
 static Barrier* starting = nullptr;
 static Barrier* stopping = nullptr;
 
-int heapIsNotDone = 0;
 
 extern "C" void kernel_init() {
     if(getCoreID() == 0){
