@@ -63,6 +63,7 @@ public:
     }
     T exchange(T v) {
         T ret;
+        // printf_no_lock("thing\n");
         __atomic_exchange(&value,&v,&ret,__ATOMIC_SEQ_CST);
         return ret;
     }

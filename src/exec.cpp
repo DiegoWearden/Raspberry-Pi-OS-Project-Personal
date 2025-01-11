@@ -67,11 +67,6 @@ extern "C" void exc_handler(unsigned long type, unsigned long esr, unsigned long
     // dump registers
     printf(":\n  ESR_EL1 0x%X ELR_EL1 0x%X\n SPSR_EL1 0%xX FAR_EL1 0x%X\n",
            esr, elr, spsr, far);
-
-        if(esr>>26==0b100100 || esr>>26==0b100101) {
-        printf("Dumping translation entry for faulting address:\n");
-        dump_translation_entry(far);
-    }
            
     // no return from exception for now
     while(1);

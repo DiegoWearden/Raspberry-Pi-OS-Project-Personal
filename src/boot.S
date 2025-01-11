@@ -62,7 +62,7 @@ el1_entry:
     bl pickKernelStack
     mov    sp, x0
 
-    bl    wake_up_cores
+    //bl    wake_up_cores
 
     bl    kernel_init
     b     proc_hang        // should never come here
@@ -119,6 +119,7 @@ secondary_kernel_main:
     bl kernel_init
     b proc_hang
 
+.global wake_up_cores
 wake_up_cores:
     mov x0, #0
     adr x0, secondary

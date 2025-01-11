@@ -47,7 +47,7 @@ CFLAGS  = -Wall -Wextra -nostdlib -ffreestanding -I$(INCLUDE_DIR) -g \
           -fno-exceptions -fno-rtti
 
 # Linker script is one level above (../linker.ld)
-LDFLAGS = -T ../linker.ld
+LDFLAGS = -T ../linker.ld -Wl,-Map=$(BUILD_DIR)/kernel.map
 
 #==============================================================================
 # Default build: normal kernel (no test objects)

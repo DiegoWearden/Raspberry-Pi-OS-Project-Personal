@@ -1,6 +1,12 @@
 {
     "files.associations": {
         "cstdint": "cpp",
-        "*.tcc": "cpp"
+        "*.tcc": "cpp",
+        "streambuf": "cpp",
+        "random": "cpp",
+        "forward_list": "cpp",
+        "fstream": "cpp",
+        "ostream": "cpp",
+        "stop_token": "cpp"
     }
 }

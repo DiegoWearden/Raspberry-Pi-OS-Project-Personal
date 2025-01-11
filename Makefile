@@ -16,6 +16,26 @@ build-tests:
 		$(MAKE) -C src ../build/$$t.img; \
 	done
 
+# Ensure the outer Makefile instructs the inner Makefile to generate a map file
+build-tests:
+	@for t in $(TEST_NAMES); do \
+		echo "=========================================================="; \
+		echo "Building test: $$t"; \
+		$(MAKE) -C src ../build/$$t.img LDFLAGS="-T ../linker.ld -Map=../build/$$t.map"; \
+	done
+
+# New target in the outer Makefile to print the map file
+showmap:
+	@echo "Displaying Linker Map File for Kernel:"
+	cat build/kernel.map
+
+# New target in the outer Makefile to print heap symbols using readelf
+heapsymbols:
+	@echo "Heap Symbol Information from ELF:"
+	$(CROSS_COMPILE)readelf -s build/kernel.elf | grep heap
+
+
+
 # 4) "test": Run QEMU for each test image, capturing output and comparing results
 test: all
 	@for t in $(TEST_NAMES); do \
@@ -51,12 +71,17 @@ test: all
 run: all
 	qemu-system-aarch64 \
 	    -M raspi3b \
-	    -kernel build/kernel8.img \
+	    -kernel build/t0.img \
 	    -smp 4 \
 	    -serial stdio \
 	    -nographic
 
 # 6) Clean: Remove all build files and test outputs except source files
+
+debug: all
+	qemu-system-aarch64 -M raspi3b -kernel build/t0.img -smp 4 -serial stdio \
+	                    -S -gdb tcp::1234
+
 clean:
 	@$(MAKE) -C src clean
 

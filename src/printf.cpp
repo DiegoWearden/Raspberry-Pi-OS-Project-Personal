@@ -132,7 +132,6 @@ void tfp_format(void* putp,putcf putf,char *fmt, va_list va)
 
     char ch;
 
-
     while ((ch=*(fmt++))) {
         if (ch!='%')
             putf(putp,ch);
@@ -221,6 +220,14 @@ void tfp_printf(char *fmt, ...)
     va_end(va);
     }
 
+void tfp_printf_no_lock(char *fmt, ...)
+    {
+    va_list va;
+    va_start(va,fmt);
+    tfp_format(stdout_putp,stdout_putf,fmt,va);
+    va_end(va);
+    }
+
 static void putcp(void* p,char c)
     {
     *(*((char**)p))++ = c;
@@ -236,3 +243,28 @@ void tfp_sprintf(char* s,char *fmt, ...)
     putcp(&s,0);
     va_end(va);
     }
+
+__attribute__((noreturn)) void panic(char* fmt, ...) {
+    va_list va;
+    va_start(va, fmt);
+
+    // Lock to prevent interleaved outputs if multiple cores or threads
+    lock.lock();
+
+    tfp_printf("\n***** KERNEL PANIC *****\n");
+    // Print the caller's error message
+    tfp_format(stdout_putp, stdout_putf, fmt, va);
+    tfp_printf("\n");
+
+    lock.unlock();
+    va_end(va);
+
+    // Optional: If you have a function to disable interrupts, call it here.
+    // disable_interrupts();
+
+    // Hang forever
+    // Some systems might do an infinite loop or a 'wfi' in ARM.
+    while (1) {
+        __asm__ volatile("wfi");
+    }
+}

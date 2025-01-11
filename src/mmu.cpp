@@ -126,6 +126,7 @@ static VMSAv8_64_DESCRIPTOR __attribute__((aligned(TLB_ALIGNMENT)))
 //------------------------------------------------------------------------------
 //                 MMU_setup_pagetable (exact same logic)
 //------------------------------------------------------------------------------
+
 void MMU_setup_pagetable(void)
 {
     uint32_t base;
@@ -169,6 +170,25 @@ void MMU_setup_pagetable(void)
             .APTable    = (APTable_Enum)0,
             .NSTable    = 0
         };
+        VMSAv8_64_DESCRIPTOR thing = (VMSAv8_64_DESCRIPTOR){
+            .EntryType  = ENTRYTYPE_BLOCK,         // was 1
+            .MemAttr    = MT_NORMAL,               // "normal"
+            .S2AP       = (S2AP_Enum)0,            // not used in original? default 0
+            .SH         = STAGE2_SH_INNER_SHAREABLE,
+            .AF         = 1,
+            ._reserved11 = 0,
+            .Address    = static_cast<uint64_t>(base) << (21 - 12),
+            ._reserved48_51 = 0,
+            .Contiguous = 0,
+            ._reserved53 = 0,
+            .XN         = 0,
+            ._reserved55_58 = 0,
+            .PXNTable   = 0,
+            .XNTable    = 0,
+            .APTable    = (APTable_Enum)0,
+            .NSTable    = 0
+        };
+        // printf("thing: 0x%X\n", thing);
     }
 
     // (b) VC ram up to 0x3F000000
@@ -192,6 +212,7 @@ void MMU_setup_pagetable(void)
             .APTable    = (APTable_Enum)0,
             .NSTable    = 0
         };
+        // printf("thing:2 0x%X\n", Stage2map1to1[base]);
     }
 
     //(c) 16 MB peripherals at 0x3F000000 - 0x40000000
@@ -215,6 +236,25 @@ void MMU_setup_pagetable(void)
             .APTable    = (APTable_Enum)0,
             .NSTable    = 0
         };
+                VMSAv8_64_DESCRIPTOR thing = (VMSAv8_64_DESCRIPTOR){
+            .EntryType  = ENTRYTYPE_BLOCK,         // was 1
+            .MemAttr    = MT_NORMAL,               // "normal"
+            .S2AP       = (S2AP_Enum)0,            // not used in original? default 0
+            .SH         = STAGE2_SH_INNER_SHAREABLE,
+            .AF         = 1,
+            ._reserved11 = 0,
+            .Address    = static_cast<uint64_t>(base) << (21 - 12),
+            ._reserved48_51 = 0,
+            .Contiguous = 0,
+            ._reserved53 = 0,
+            .XN         = 0,
+            ._reserved55_58 = 0,
+            .PXNTable   = 0,
+            .XNTable    = 0,
+            .APTable    = (APTable_Enum)0,
+            .NSTable    = 0
+        };
+        // printf("thing:3 0x%X\n", thing);
     }
 
     // (d) 2 MB for mailboxes at 0x40000000 (shared device, never execute)

@@ -15,6 +15,7 @@
 #ifndef __ASSEMBLER__
 
 void memzero(unsigned long src, unsigned long n);
+void wake_up_cores();
 
 #endif
 
