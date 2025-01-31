@@ -1,0 +1,591 @@
+
+Discarded input sections
+
+ .group         0x0000000000000000        0xc ../build/critical.o
+ .group         0x0000000000000000        0x8 ../build/critical.o
+ .group         0x0000000000000000        0x8 ../build/critical.o
+ .comment       0x0000000000000000       0x13 ../build/critical.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 ../build/critical.o
+ .eh_frame      0x0000000000000000       0xa8 ../build/critical.o
+ .group         0x0000000000000000        0xc ../build/debug.o
+ .group         0x0000000000000000        0xc ../build/debug.o
+ .group         0x0000000000000000        0xc ../build/debug.o
+ .group         0x0000000000000000        0xc ../build/debug.o
+ .group         0x0000000000000000        0x8 ../build/debug.o
+ .group         0x0000000000000000        0xc ../build/debug.o
+ .group         0x0000000000000000        0x8 ../build/debug.o
+ .group         0x0000000000000000        0x8 ../build/debug.o
+ .group         0x0000000000000000        0x8 ../build/debug.o
+ .group         0x0000000000000000        0x8 ../build/debug.o
+ .group         0x0000000000000000        0x8 ../build/debug.o
+ .group         0x0000000000000000        0x8 ../build/debug.o
+ .text._ZN8SpinLockC2Ev
+                0x0000000000000000       0x24 ../build/debug.o
+ .text._ZN6AtomicIbEC2Eb
+                0x0000000000000000       0x24 ../build/debug.o
+ .text._ZN6AtomicIjEC2Ej
+                0x0000000000000000       0x24 ../build/debug.o
+ .comment       0x0000000000000000       0x13 ../build/debug.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 ../build/debug.o
+ .eh_frame      0x0000000000000000      0x2a8 ../build/debug.o
+ .comment       0x0000000000000000       0x13 ../build/exec.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 ../build/exec.o
+ .eh_frame      0x0000000000000000       0x50 ../build/exec.o
+ .group         0x0000000000000000        0xc ../build/heap.o
+ .group         0x0000000000000000        0xc ../build/heap.o
+ .group         0x0000000000000000        0xc ../build/heap.o
+ .group         0x0000000000000000        0xc ../build/heap.o
+ .group         0x0000000000000000        0x8 ../build/heap.o
+ .group         0x0000000000000000        0xc ../build/heap.o
+ .group         0x0000000000000000        0x8 ../build/heap.o
+ .group         0x0000000000000000        0x8 ../build/heap.o
+ .group         0x0000000000000000        0xc ../build/heap.o
+ .group         0x0000000000000000        0xc ../build/heap.o
+ .text._Z15iAmStuckInALoopb
+                0x0000000000000000       0x64 ../build/heap.o
+ .text._ZN8SpinLockC2Ev
+                0x0000000000000000       0x24 ../build/heap.o
+ .text._ZN8SpinLock4lockEv
+                0x0000000000000000       0x54 ../build/heap.o
+ .text._ZN8SpinLock6unlockEv
+                0x0000000000000000       0x24 ../build/heap.o
+ .text._ZN6AtomicIbEC2Eb
+                0x0000000000000000       0x24 ../build/heap.o
+ .text._ZN6AtomicIbE13monitor_valueEv
+                0x0000000000000000       0x20 ../build/heap.o
+ .text._ZN6AtomicIbE8exchangeEb
+                0x0000000000000000       0x34 ../build/heap.o
+ .text._ZN6AtomicIbE3setEb
+                0x0000000000000000       0x24 ../build/heap.o
+ .comment       0x0000000000000000       0x13 ../build/heap.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 ../build/heap.o
+ .eh_frame      0x0000000000000000      0x438 ../build/heap.o
+ .group         0x0000000000000000        0xc ../build/kernel.o
+ .group         0x0000000000000000        0xc ../build/kernel.o
+ .group         0x0000000000000000        0xc ../build/kernel.o
+ .group         0x0000000000000000        0xc ../build/kernel.o
+ .group         0x0000000000000000        0x8 ../build/kernel.o
+ .group         0x0000000000000000        0x8 ../build/kernel.o
+ .group         0x0000000000000000        0x8 ../build/kernel.o
+ .group         0x0000000000000000        0x8 ../build/kernel.o
+ .group         0x0000000000000000        0x8 ../build/kernel.o
+ .group         0x0000000000000000        0x8 ../build/kernel.o
+ .text._Z15iAmStuckInALoopb
+                0x0000000000000000       0x64 ../build/kernel.o
+ .text._ZN8SpinLockC2Ev
+                0x0000000000000000       0x24 ../build/kernel.o
+ .text._ZN6AtomicIbEC2Eb
+                0x0000000000000000       0x24 ../build/kernel.o
+ .text._ZN6AtomicIjEC2Ej
+                0x0000000000000000       0x24 ../build/kernel.o
+ .text._ZN6AtomicIjE3getEv
+                0x0000000000000000       0x18 ../build/kernel.o
+ .text._ZN6AtomicIiEC2Ei
+                0x0000000000000000       0x24 ../build/kernel.o
+ .comment       0x0000000000000000       0x13 ../build/kernel.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 ../build/kernel.o
+ .eh_frame      0x0000000000000000      0x360 ../build/kernel.o
+ .comment       0x0000000000000000       0x13 ../build/libk.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 ../build/libk.o
+ .eh_frame      0x0000000000000000       0x80 ../build/libk.o
+ .comment       0x0000000000000000       0x13 ../build/mmu.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 ../build/mmu.o
+ .eh_frame      0x0000000000000000       0x58 ../build/mmu.o
+ .group         0x0000000000000000        0xc ../build/printf.o
+ .group         0x0000000000000000        0xc ../build/printf.o
+ .group         0x0000000000000000        0xc ../build/printf.o
+ .group         0x0000000000000000        0xc ../build/printf.o
+ .group         0x0000000000000000        0x8 ../build/printf.o
+ .group         0x0000000000000000        0xc ../build/printf.o
+ .group         0x0000000000000000        0x8 ../build/printf.o
+ .group         0x0000000000000000        0x8 ../build/printf.o
+ .text._Z15iAmStuckInALoopb
+                0x0000000000000000       0x64 ../build/printf.o
+ .text._ZN8SpinLockC2Ev
+                0x0000000000000000       0x24 ../build/printf.o
+ .text._ZN8SpinLock4lockEv
+                0x0000000000000000       0x54 ../build/printf.o
+ .text._ZN8SpinLock6unlockEv
+                0x0000000000000000       0x24 ../build/printf.o
+ .text._ZN6AtomicIbEC2Eb
+                0x0000000000000000       0x24 ../build/printf.o
+ .text._ZN6AtomicIbE13monitor_valueEv
+                0x0000000000000000       0x20 ../build/printf.o
+ .text._ZN6AtomicIbE8exchangeEb
+                0x0000000000000000       0x34 ../build/printf.o
+ .text._ZN6AtomicIbE3setEb
+                0x0000000000000000       0x24 ../build/printf.o
+ .comment       0x0000000000000000       0x13 ../build/printf.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 ../build/printf.o
+ .eh_frame      0x0000000000000000      0x298 ../build/printf.o
+ .comment       0x0000000000000000       0x13 ../build/rpi-SmartStart.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 ../build/rpi-SmartStart.o
+ .eh_frame      0x0000000000000000       0x70 ../build/rpi-SmartStart.o
+ .comment       0x0000000000000000       0x13 ../build/uart.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 ../build/uart.o
+ .eh_frame      0x0000000000000000       0xb8 ../build/uart.o
+ .group         0x0000000000000000        0xc ../build/t0.o
+ .group         0x0000000000000000        0xc ../build/t0.o
+ .group         0x0000000000000000        0xc ../build/t0.o
+ .group         0x0000000000000000        0xc ../build/t0.o
+ .group         0x0000000000000000        0x8 ../build/t0.o
+ .group         0x0000000000000000        0x8 ../build/t0.o
+ .group         0x0000000000000000        0xc ../build/t0.o
+ .text._Z15iAmStuckInALoopb
+                0x0000000000000000       0x64 ../build/t0.o
+ .text._ZN8SpinLock4lockEv
+                0x0000000000000000       0x54 ../build/t0.o
+ .text._ZN8SpinLock6unlockEv
+                0x0000000000000000       0x24 ../build/t0.o
+ .text._ZN6AtomicIbE13monitor_valueEv
+                0x0000000000000000       0x20 ../build/t0.o
+ .text._ZN6AtomicIbE8exchangeEb
+                0x0000000000000000       0x34 ../build/t0.o
+ .text._ZN6AtomicIbE3setEb
+                0x0000000000000000       0x24 ../build/t0.o
+ .comment       0x0000000000000000       0x13 ../build/t0.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 ../build/t0.o
+ .eh_frame      0x0000000000000000      0x120 ../build/t0.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+                0x0000000000080000                . = 0x80000
+
+.text           0x0000000000080000     0x46b4
+ *(.text.boot)
+ .text.boot     0x0000000000080000      0x9b8 ../build/boot.o
+                0x0000000000080110                wake_up_cores
+ *(.text .text.* .gnu.linkonce.t*)
+ .text          0x00000000000809b8        0x0 ../build/boot.o
+ .text          0x00000000000809b8       0x10 ../build/mm.o
+                0x00000000000809b8                memzero
+ .text          0x00000000000809c8       0x4c ../build/utils.o
+                0x00000000000809c8                put32
+                0x00000000000809d0                get32
+                0x00000000000809d8                delay
+                0x00000000000809e4                getCoreID
+                0x00000000000809f0                get_el
+                0x00000000000809fc                monitor
+                0x0000000000080a0c                outb
+ *fill*         0x0000000000080a14        0x4 
+ .text.enable_mmu_tables
+                0x0000000000080a18       0x50 ../build/utils.o
+                0x0000000000080a18                enable_mmu_tables
+ .text.ARMaddrToGPUaddr
+                0x0000000000080a68        0xc ../build/utils.o
+                0x0000000000080a68                ARMaddrToGPUaddr
+ .text          0x0000000000080a74       0x54 ../build/critical.o
+ .text._ZN8SpinLockC2Ev
+                0x0000000000080ac8       0x24 ../build/critical.o
+                0x0000000000080ac8                SpinLock::SpinLock()
+                0x0000000000080ac8                SpinLock::SpinLock()
+ .text._ZN6AtomicIbEC2Eb
+                0x0000000000080aec       0x24 ../build/critical.o
+                0x0000000000080aec                Atomic<bool>::Atomic(bool)
+                0x0000000000080aec                Atomic<bool>::Atomic(bool)
+ .text._ZN6AtomicIjEC2Ej
+                0x0000000000080b10       0x24 ../build/critical.o
+                0x0000000000080b10                Atomic<unsigned int>::Atomic(unsigned int)
+                0x0000000000080b10                Atomic<unsigned int>::Atomic(unsigned int)
+ .text          0x0000000000080b34      0x4d0 ../build/debug.o
+                0x0000000000080b34                Debug::init(OutputStream<char>*)
+                0x0000000000080b58                Debug::vprintf(char const*, std::__va_list)
+                0x0000000000080b9c                Debug::tfp_printf(char const*, ...)
+                0x0000000000080c38                Debug::shutdown()
+                0x0000000000080cb4                Debug::vpanic(char const*, std::__va_list)
+                0x0000000000080d40                Debug::panic(char const*, ...)
+                0x0000000000080ddc                Debug::vdebug(char const*, std::__va_list)
+                0x0000000000080e84                Debug::debug(char const*, ...)
+                0x0000000000080f50                Debug::missing(char const*, int)
+ .text._Z15iAmStuckInALoopb
+                0x0000000000081004       0x64 ../build/debug.o
+                0x0000000000081004                iAmStuckInALoop(bool)
+ .text._ZN8SpinLock4lockEv
+                0x0000000000081068       0x54 ../build/debug.o
+                0x0000000000081068                SpinLock::lock()
+ .text._ZN8SpinLock6unlockEv
+                0x00000000000810bc       0x24 ../build/debug.o
+                0x00000000000810bc                SpinLock::unlock()
+ .text._ZN6AtomicIbE13monitor_valueEv
+                0x00000000000810e0       0x20 ../build/debug.o
+                0x00000000000810e0                Atomic<bool>::monitor_value()
+ .text._ZN6AtomicIbE8exchangeEb
+                0x0000000000081100       0x34 ../build/debug.o
+                0x0000000000081100                Atomic<bool>::exchange(bool)
+ .text._ZN6AtomicIbE3setEb
+                0x0000000000081134       0x24 ../build/debug.o
+                0x0000000000081134                Atomic<bool>::set(bool)
+ .text._ZN6AtomicIjE3getEv
+                0x0000000000081158       0x18 ../build/debug.o
+                0x0000000000081158                Atomic<unsigned int>::get()
+ .text._ZN6AtomicIiEC2Ei
+                0x0000000000081170       0x24 ../build/debug.o
+                0x0000000000081170                Atomic<int>::Atomic(int)
+                0x0000000000081170                Atomic<int>::Atomic(int)
+ .text._ZN6AtomicIiE9fetch_addEi
+                0x0000000000081194       0x30 ../build/debug.o
+                0x0000000000081194                Atomic<int>::fetch_add(int)
+ .text          0x00000000000811c4      0x3ac ../build/exec.o
+                0x00000000000811c4                dump_translation_entry(unsigned long long)
+                0x000000000008127c                exc_handler
+ .text          0x0000000000081570      0xa88 ../build/heap.o
+                0x0000000000081570                gheith::abs(int)
+                0x000000000008159c                gheith::size(int)
+                0x00000000000815d0                gheith::headerFromFooter(int)
+                0x00000000000815fc                gheith::footerFromHeader(int)
+                0x0000000000081628                gheith::sanity(int)
+                0x000000000008175c                gheith::left(int)
+                0x0000000000081780                gheith::right(int)
+                0x00000000000817ac                gheith::next(int)
+                0x00000000000817e4                gheith::prev(int)
+                0x000000000008181c                gheith::setNext(int, int)
+                0x0000000000081858                gheith::setPrev(int, int)
+                0x0000000000081894                gheith::remove(int)
+                0x0000000000081908                gheith::makeAvail(int, int)
+                0x00000000000819d0                gheith::makeTaken(int, int)
+                0x0000000000081a4c                gheith::isAvail(int)
+                0x0000000000081a84                gheith::isTaken(int)
+                0x0000000000081ab8                heapInit(void*, unsigned long long)
+                0x0000000000081b88                malloc
+                0x0000000000081d60                free
+                0x0000000000081ef8                operator new(unsigned long)
+                0x0000000000081f34                operator delete(void*)
+                0x0000000000081f54                operator delete(void*, unsigned long long)
+                0x0000000000081f78                operator new[](unsigned long)
+                0x0000000000081fb4                operator delete[](void*)
+                0x0000000000081fd4                operator delete[](void*, unsigned long long)
+ .text._ZN10LockGuardPI8SpinLockEC2EPS0_
+                0x0000000000081ff8       0x3c ../build/heap.o
+                0x0000000000081ff8                LockGuardP<SpinLock>::LockGuardP(SpinLock*)
+                0x0000000000081ff8                LockGuardP<SpinLock>::LockGuardP(SpinLock*)
+ .text._ZN10LockGuardPI8SpinLockED2Ev
+                0x0000000000082034       0x34 ../build/heap.o
+                0x0000000000082034                LockGuardP<SpinLock>::~LockGuardP()
+                0x0000000000082034                LockGuardP<SpinLock>::~LockGuardP()
+ .text          0x0000000000082068      0x894 ../build/kernel.o
+                0x0000000000082068                pickKernelStack
+                0x00000000000820b0                uart_putc_wrapper(void*, char)
+                0x00000000000820e8                test_stxr_ldxr_operations()
+                0x0000000000082174                map_page(unsigned long long*, unsigned long long, unsigned long long, unsigned long long)
+                0x00000000000821c8                unmap_page(unsigned long long*, unsigned long long)
+                0x000000000008221c                print_translation_table(unsigned long long*)
+                0x00000000000822c4                clear_caches()
+                0x00000000000822e0                mmu_init()
+                0x000000000008240c                print_binary(unsigned long long)
+                0x0000000000082490                memcpy(void*, void const*, unsigned long long)
+                0x0000000000082500                print_ttlb_lvl1_mappings()
+                0x0000000000082578                test_null_mapping()
+                0x00000000000825dc                test_atomic_operations_iso()
+                0x0000000000082634                test_atomic_operations()
+                0x00000000000826e8                ensure_address_mapped(unsigned long long*, unsigned long long)
+                0x0000000000082744                print_memory_value(unsigned long long)
+                0x0000000000082780                kernel_init
+ .text._ZN7BarrierC2Ej
+                0x00000000000828fc       0x28 ../build/kernel.o
+                0x00000000000828fc                Barrier::Barrier(unsigned int)
+                0x00000000000828fc                Barrier::Barrier(unsigned int)
+ .text._ZN7Barrier4syncEv
+                0x0000000000082924       0x54 ../build/kernel.o
+                0x0000000000082924                Barrier::sync()
+ .text._ZN6AtomicIjE9add_fetchEj
+                0x0000000000082978       0x30 ../build/kernel.o
+                0x0000000000082978                Atomic<unsigned int>::add_fetch(unsigned int)
+ .text._ZN6PerCPUI5StackE6forCPUEi
+                0x00000000000829a8       0x24 ../build/kernel.o
+                0x00000000000829a8                PerCPU<Stack>::forCPU(int)
+ .text          0x00000000000829cc      0x120 ../build/libk.o
+                0x00000000000829cc                K::strlen(char const*)
+                0x0000000000082a1c                K::isdigit(int)
+                0x0000000000082a50                K::streq(char const*, char const*)
+                0x0000000000082acc                __cxa_pure_virtual
+ .text          0x0000000000082aec      0x980 ../build/mmu.o
+                0x0000000000082aec                MMU_setup_pagetable
+                0x0000000000083444                MMU_enable
+ .text          0x000000000008346c      0xbd0 ../build/printf.o
+                0x0000000000083848                tfp_format(void*, void (*)(void*, char), char*, std::__va_list)
+                0x0000000000083c68                init_printf(void*, void (*)(void*, char))
+                0x0000000000083ca0                tfp_printf(char*, ...)
+                0x0000000000083d74                tfp_printf_no_lock(char*, ...)
+                0x0000000000083e68                tfp_sprintf(char*, char*, ...)
+                0x0000000000083f20                panic(char*, ...)
+ .text          0x000000000008403c      0x358 ../build/rpi-SmartStart.o
+                0x000000000008403c                mailbox_write(unsigned char, unsigned int)
+                0x00000000000840b8                mailbox_read(unsigned char)
+                0x0000000000084120                mailbox_tag_message
+ .text          0x0000000000084394      0x260 ../build/uart.o
+                0x0000000000084394                uart_init()
+                0x0000000000084488                uart_getc()
+                0x00000000000844d4                uart_putc(char)
+                0x000000000008452c                uart_puts(char const*)
+                0x0000000000084570                uart_hex(unsigned int)
+ .text          0x00000000000845f4       0x88 ../build/t0.o
+                0x00000000000845f4                work()
+                0x000000000008465c                kernelMain()
+ .text._Z8criticalIPFvvEEvT_
+                0x000000000008467c       0x38 ../build/t0.o
+                0x000000000008467c                void critical<void (*)()>(void (*)())
+
+.iplt           0x00000000000846b4        0x0
+ .iplt          0x00000000000846b4        0x0 ../build/boot.o
+
+.rodata         0x00000000000846b8      0x780
+ *(.rodata .rodata.* .gnu.linkonce.r*)
+ .rodata        0x00000000000846b8       0x6b ../build/debug.o
+ *fill*         0x0000000000084723        0x5 
+ .rodata        0x0000000000084728      0x338 ../build/exec.o
+ .rodata        0x0000000000084a60       0xc6 ../build/heap.o
+ *fill*         0x0000000000084b26        0x2 
+ .rodata        0x0000000000084b28      0x29d ../build/kernel.o
+ *fill*         0x0000000000084dc5        0x3 
+ .rodata        0x0000000000084dc8       0x1b ../build/libk.o
+ *fill*         0x0000000000084de3        0x5 
+ .rodata        0x0000000000084de8       0x22 ../build/printf.o
+ *fill*         0x0000000000084e0a        0x6 
+ .rodata        0x0000000000084e10        0x8 ../build/rpi-SmartStart.o
+ .rodata        0x0000000000084e18       0x20 ../build/t0.o
+                [!provide]                        PROVIDE (_data = .)
+
+.rela.dyn       0x0000000000084e38        0x0
+ .rela.text.boot
+                0x0000000000084e38        0x0 ../build/boot.o
+ .rela.iplt     0x0000000000084e38        0x0 ../build/boot.o
+ .rela.got      0x0000000000084e38        0x0 ../build/boot.o
+
+.data           0x0000000000084e38        0x7
+ *(.data .data.* .gnu.linkonce.d*)
+ .data          0x0000000000084e38        0x0 ../build/boot.o
+ .data          0x0000000000084e38        0x0 ../build/mm.o
+ .data          0x0000000000084e38        0x0 ../build/utils.o
+ .data          0x0000000000084e38        0x0 ../build/critical.o
+ .data          0x0000000000084e38        0x0 ../build/debug.o
+ .data          0x0000000000084e38        0x0 ../build/exec.o
+ .data          0x0000000000084e38        0x0 ../build/heap.o
+ .data          0x0000000000084e38        0x7 ../build/kernel.o
+                0x0000000000084e38                buffer
+ .data          0x0000000000084e3f        0x0 ../build/libk.o
+ .data          0x0000000000084e3f        0x0 ../build/mmu.o
+ .data          0x0000000000084e3f        0x0 ../build/printf.o
+ .data          0x0000000000084e3f        0x0 ../build/rpi-SmartStart.o
+ .data          0x0000000000084e3f        0x0 ../build/uart.o
+ .data          0x0000000000084e3f        0x0 ../build/t0.o
+
+.igot.plt       0x0000000000084e40        0x0
+ .igot.plt      0x0000000000084e40        0x0 ../build/boot.o
+
+.got            0x0000000000084e40       0x30
+ .got           0x0000000000084e40       0x30 ../build/boot.o
+                0x0000000000084e40                _GLOBAL_OFFSET_TABLE_
+
+.got.plt        0x0000000000084e70       0x18
+ .got.plt       0x0000000000084e70       0x18 ../build/boot.o
+
+.init_array     0x0000000000084e88       0x20
+ .init_array    0x0000000000084e88        0x8 ../build/critical.o
+ .init_array    0x0000000000084e90        0x8 ../build/debug.o
+ .init_array    0x0000000000084e98        0x8 ../build/kernel.o
+ .init_array    0x0000000000084ea0        0x8 ../build/printf.o
+
+.bss            0x0000000000085000    0x2b020
+                0x0000000000085000                . = ALIGN (0x10)
+                0x0000000000085000                __bss_start = .
+ *(.bss .bss.*)
+ .bss           0x0000000000085000        0x0 ../build/boot.o
+ .bss           0x0000000000085000        0x0 ../build/mm.o
+ .bss           0x0000000000085000        0x0 ../build/utils.o
+ .bss           0x0000000000085000       0x12 ../build/critical.o
+                0x0000000000085000                critical_depth
+                0x0000000000085008                critical_owner
+                0x0000000000085010                critical_section_lock
+ *fill*         0x0000000000085012        0x6 
+ .bss           0x0000000000085018       0x21 ../build/debug.o
+                0x0000000000085018                Debug::sink
+                0x0000000000085020                Debug::debugAll
+                0x0000000000085021                Debug::shutdown_called
+                0x0000000000085028                Debug::checks
+                0x0000000000085030                missing_flag
+ .bss           0x0000000000085039        0x1 ../build/exec.o
+ *fill*         0x000000000008503a        0x6 
+ .bss           0x0000000000085040       0x28 ../build/heap.o
+ *fill*         0x0000000000085068      0xf98 
+ .bss           0x0000000000086000    0x22030 ../build/kernel.o
+                0x0000000000086000                onHypervisor
+                0x0000000000086010                stacks
+                0x00000000000a6010                ttbr
+                0x00000000000a7000                ttlb_lvl1
+                0x00000000000a8000                atomicCounter
+                0x00000000000a8008                spin
+                0x00000000000a8010                __heap_size
+ .bss           0x00000000000a8030        0x1 ../build/libk.o
+ *fill*         0x00000000000a8031      0xfcf 
+ .bss           0x00000000000a9000     0x7000 ../build/mmu.o
+ .bss           0x00000000000b0000       0x18 ../build/printf.o
+                0x00000000000b0000                lock
+ .bss           0x00000000000b0018        0x0 ../build/rpi-SmartStart.o
+ .bss           0x00000000000b0018        0x0 ../build/uart.o
+ .bss           0x00000000000b0018        0x8 ../build/t0.o
+ *(COMMON)
+                0x00000000000b0020                __bss_end = .
+                0x00000000000b0020                _end = .
+
+.heap           0x00000000000b0020   0x100000
+                0x00000000000b0020                __heap_start = .
+                0x00000000001b0020                . = (. + 0x100000)
+ *fill*         0x00000000000b0020   0x100000 
+                0x00000000001b0020                __heap_end = .
+
+/DISCARD/
+ *(.comment)
+ *(.gnu*)
+ *(.note*)
+ *(.eh_frame*)
+                0x0000000000005604                __bss_size = ((__bss_end - __bss_start) >> 0x3)
+LOAD ../build/boot.o
+LOAD ../build/mm.o
+LOAD ../build/utils.o
+LOAD ../build/critical.o
+LOAD ../build/debug.o
+LOAD ../build/exec.o
+LOAD ../build/heap.o
+LOAD ../build/kernel.o
+LOAD ../build/libk.o
+LOAD ../build/mmu.o
+LOAD ../build/printf.o
+LOAD ../build/rpi-SmartStart.o
+LOAD ../build/uart.o
+LOAD ../build/t0.o
+OUTPUT(../build/t0.elf elf64-littleaarch64)
+LOAD linker stubs
+
+.debug_info     0x0000000000000000     0x51ba
+ .debug_info    0x0000000000000000      0x540 ../build/critical.o
+ .debug_info    0x0000000000000540      0xdb4 ../build/debug.o
+ .debug_info    0x00000000000012f4      0x1b4 ../build/exec.o
+ .debug_info    0x00000000000014a8      0xe65 ../build/heap.o
+ .debug_info    0x000000000000230d     0x10af ../build/kernel.o
+ .debug_info    0x00000000000033bc      0x463 ../build/libk.o
+ .debug_info    0x000000000000381f      0x626 ../build/mmu.o
+ .debug_info    0x0000000000003e45      0x9f2 ../build/printf.o
+ .debug_info    0x0000000000004837      0x33b ../build/rpi-SmartStart.o
+ .debug_info    0x0000000000004b72      0x18b ../build/uart.o
+ .debug_info    0x0000000000004cfd      0x4bd ../build/t0.o
+
+.debug_abbrev   0x0000000000000000     0x1b9b
+ .debug_abbrev  0x0000000000000000      0x1e3 ../build/critical.o
+ .debug_abbrev  0x00000000000001e3      0x3d1 ../build/debug.o
+ .debug_abbrev  0x00000000000005b4      0x10a ../build/exec.o
+ .debug_abbrev  0x00000000000006be      0x3d3 ../build/heap.o
+ .debug_abbrev  0x0000000000000a91      0x4be ../build/kernel.o
+ .debug_abbrev  0x0000000000000f4f      0x20c ../build/libk.o
+ .debug_abbrev  0x000000000000115b      0x1d5 ../build/mmu.o
+ .debug_abbrev  0x0000000000001330      0x39e ../build/printf.o
+ .debug_abbrev  0x00000000000016ce      0x184 ../build/rpi-SmartStart.o
+ .debug_abbrev  0x0000000000001852       0xf9 ../build/uart.o
+ .debug_abbrev  0x000000000000194b      0x250 ../build/t0.o
+
+.debug_aranges  0x0000000000000000      0x530
+ .debug_aranges
+                0x0000000000000000       0x60 ../build/critical.o
+ .debug_aranges
+                0x0000000000000060       0xf0 ../build/debug.o
+ .debug_aranges
+                0x0000000000000150       0x30 ../build/exec.o
+ .debug_aranges
+                0x0000000000000180       0xd0 ../build/heap.o
+ .debug_aranges
+                0x0000000000000250       0xd0 ../build/kernel.o
+ .debug_aranges
+                0x0000000000000320       0x30 ../build/libk.o
+ .debug_aranges
+                0x0000000000000350       0x30 ../build/mmu.o
+ .debug_aranges
+                0x0000000000000380       0xb0 ../build/printf.o
+ .debug_aranges
+                0x0000000000000430       0x30 ../build/rpi-SmartStart.o
+ .debug_aranges
+                0x0000000000000460       0x30 ../build/uart.o
+ .debug_aranges
+                0x0000000000000490       0xa0 ../build/t0.o
+
+.debug_rnglists
+                0x0000000000000000      0x2a9
+ .debug_rnglists
+                0x0000000000000000       0x35 ../build/critical.o
+ .debug_rnglists
+                0x0000000000000035       0x90 ../build/debug.o
+ .debug_rnglists
+                0x00000000000000c5       0x8f ../build/heap.o
+ .debug_rnglists
+                0x0000000000000154       0x7c ../build/kernel.o
+ .debug_rnglists
+                0x00000000000001d0       0x7b ../build/printf.o
+ .debug_rnglists
+                0x000000000000024b       0x5e ../build/t0.o
+
+.debug_line     0x0000000000000000     0x19a0
+ .debug_line    0x0000000000000000       0xc3 ../build/critical.o
+ .debug_line    0x00000000000000c3      0x337 ../build/debug.o
+ .debug_line    0x00000000000003fa      0x14f ../build/exec.o
+ .debug_line    0x0000000000000549      0x594 ../build/heap.o
+ .debug_line    0x0000000000000add      0x496 ../build/kernel.o
+ .debug_line    0x0000000000000f73       0xef ../build/libk.o
+ .debug_line    0x0000000000001062      0x133 ../build/mmu.o
+ .debug_line    0x0000000000001195      0x3fd ../build/printf.o
+ .debug_line    0x0000000000001592      0x16f ../build/rpi-SmartStart.o
+ .debug_line    0x0000000000001701       0xf3 ../build/uart.o
+ .debug_line    0x00000000000017f4      0x1ac ../build/t0.o
+
+.debug_str      0x0000000000000000     0x1d92
+ .debug_str     0x0000000000000000     0x1d92 ../build/critical.o
+                                        0x48d (size before relaxing)
+ .debug_str     0x0000000000001d92      0x8ac ../build/debug.o
+ .debug_str     0x0000000000001d92      0x1c9 ../build/exec.o
+ .debug_str     0x0000000000001d92      0x77e ../build/heap.o
+ .debug_str     0x0000000000001d92      0xabf ../build/kernel.o
+ .debug_str     0x0000000000001d92      0x450 ../build/libk.o
+ .debug_str     0x0000000000001d92      0xae8 ../build/mmu.o
+ .debug_str     0x0000000000001d92      0x524 ../build/printf.o
+ .debug_str     0x0000000000001d92      0x2af ../build/rpi-SmartStart.o
+ .debug_str     0x0000000000001d92      0x164 ../build/uart.o
+ .debug_str     0x0000000000001d92      0x3dc ../build/t0.o
+
+.debug_line_str
+                0x0000000000000000      0x18d
+ .debug_line_str
+                0x0000000000000000      0x18d ../build/critical.o
+                                         0xc8 (size before relaxing)
+ .debug_line_str
+                0x000000000000018d      0x10d ../build/debug.o
+ .debug_line_str
+                0x000000000000018d       0xb1 ../build/exec.o
+ .debug_line_str
+                0x000000000000018d       0xc9 ../build/heap.o
+ .debug_line_str
+                0x000000000000018d       0xf5 ../build/kernel.o
+ .debug_line_str
+                0x000000000000018d       0xf0 ../build/libk.o
+ .debug_line_str
+                0x000000000000018d       0xb6 ../build/mmu.o
+ .debug_line_str
+                0x000000000000018d      0x108 ../build/printf.o
+ .debug_line_str
+                0x000000000000018d      0x112 ../build/rpi-SmartStart.o
+ .debug_line_str
+                0x000000000000018d       0xa0 ../build/uart.o
+ .debug_line_str
+                0x000000000000018d       0xe0 ../build/t0.o

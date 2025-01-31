@@ -73,8 +73,7 @@ run: all
 	    -M raspi3b \
 	    -kernel build/t0.img \
 	    -smp 4 \
-	    -serial stdio \
-	    -nographic
+	    -serial stdio
 
 # 6) Clean: Remove all build files and test outputs except source files
 

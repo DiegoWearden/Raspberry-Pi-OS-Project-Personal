@@ -292,6 +292,7 @@ extern "C" void kernel_init() {
         heapInit(&__heap_start, (uint64_t)(&__heap_end - &__heap_start));
         starting = new Barrier(4);
         stopping = new Barrier(4);
+        smpInitDone = true;
         coresAwoken = true;
         wake_up_cores();
     }
